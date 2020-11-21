@@ -82,9 +82,9 @@ mkdir build && cd build
 sudo make install
 ```
 
-### Install using the [spack package manager](https://github.com/spack/spack)
+### Install using the [spack](https://github.com/spack/spack) package manager
 
-This approach has the adavantage that it leaves your system unchanged, it's similar to what virtual environments do for Python. Everything is installed in the `spack` directory itself which can simply be deleted.
+This approach has the advantage that it leaves your system unchanged (similar to what virtual environments do for Python). Everything is installed under the `spack` directory which can simply be deleted.
 
 First, install the spack dependencies (specific versions are not important):
 * Debian based systems (Debian, Ubuntu):
@@ -96,7 +96,7 @@ apt install python git curl patch tar gzip bzip2 xz-utils make gfortran g++ make
 yum install python36 git curl patch tar gzip bzip2 xz make gcc-gfortran gcc-c++ make gcc
 ```
 
-Then, clone the [spack package manager](https://github.com/spack/spack) and build `sqlcipher` and it's dependencies:
+Then, clone the [spack](https://github.com/spack/spack) repository and build `sqlcipher` and it's dependencies:
 ```
 git clone https://github.com/spack/spack
 source spack/share/spack/setup-env.sh
