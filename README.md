@@ -65,7 +65,10 @@ And then try the script again
 ```
 
 ## Still not working?
-If you **stil** get issues, then we need to do manually decrypt the database. The following should work to get sqlcipher manually installed (from [this](https://stackoverflow.com/a/25132478) StackOverflow answer):
+If you **stil** get issues, then we need to do manually decrypt the database.
+It's possible to manually install from source or do it using the [spack package manager](https://github.com/spack/spack).
+### Manually installing from source
+The following should work to get sqlcipher manually installed (from [this](https://stackoverflow.com/a/25132478) StackOverflow answer):
 ```
 sudo apt remove sqlcipher
 ```
@@ -78,6 +81,36 @@ mkdir build && cd build
 ../configure --enable-tempstore=yes CFLAGS="-DSQLITE_HAS_CODEC" LDFLAGS="-lcrypto"
 sudo make install
 ```
+
+### Install using the [spack package manager](https://github.com/spack/spack)
+
+This approach has the adavantage that it leaves your system unchanged, it's similar to what virtual environments do for Python. Everything is installed in the `spack` directory itself which can simply be deleted.
+
+First, install the spack dependencies (specific versions are not important):
+* Debian based systems (Debian, Ubuntu):
+```
+apt install python git curl patch tar gzip bzip2 xz-utils make gfortran g++ make gcc
+```
+* RPM based systems (CentOS):
+```
+yum install python36 git curl patch tar gzip bzip2 xz make gcc-gfortran gcc-c++ make gcc
+```
+
+Then, clone the [spack package manager](https://github.com/spack/spack) and build `sqlcipher` and it's dependencies:
+```
+git clone https://github.com/spack/spack
+source spack/share/spack/setup-env.sh
+spack install sqlcipher
+```
+This step will take a few minutes to build all the dependencies of sqlcipher.
+
+From there on, whenever needed, simply load `sqlcipher`:
+```
+source spack/share/spack/setup-env.sh
+spack load sqlcipher
+```
+
+### Run
 
 Then rerun the tool as follows. This will manually decrypt the database to a `db-decrypted.sqlite` file and use that to create the export (the decrypted database is deleted afterwards).
 ```
